@@ -1,0 +1,19 @@
+name:                TaPL
+version:             0.1.0.0
+synopsis:            Implementations of languages referred to in TaPL
+-- description:         
+license:             MIT
+license-file:        LICENSE
+author:              Kyle Marek-Spartz
+maintainer:          kyle.marek.spartz@gmail.com
+category:            Language
+build-type:          Simple
+extra-source-files:  README
+cabal-version:       >=1.10
+
+library
+  exposed-modules:     Language.TaPL.Boolean, Language.TaPL.Boolean.Eval, Language.TaPL.Boolean.Parser, Language.TaPL.Boolean.Syntax,
+                       Language.TaPL.Arith, Language.TaPL.Arith.Eval, Language.TaPL.Arith.Parser, Language.TaPL.Arith.Syntax
+  other-modules:       Language.TaPL.Boolean.Tests, Language.TaPL.Arith.Tests
+  build-depends:       base >=4.6 && <4.7, parsec >=3.1 && <3.2, QuickCheck >=2.6 && <2.7
+  hs-source-dirs:      src
