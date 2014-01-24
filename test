@@ -1,0 +1,7 @@
+cabal install && \
+echo 'Boolean:' && \
+runhaskell src/Language/TaPL/Boolean/Tests.hs && \
+echo 'Arith:' && \
+runhaskell src/Language/TaPL/Arith/Tests.hs && \
+hlint . && \
+grep -R "\t" src
