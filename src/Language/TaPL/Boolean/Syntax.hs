@@ -1,7 +1,7 @@
-module Language.TaPL.Boolean.Syntax (Term(..)) where
+module Language.TaPL.Boolean.Syntax (Term(..), isVal) where
 
 import Test.QuickCheck (Arbitrary, arbitrary, sized, oneof)
-import Control.Monad (liftM, liftM3)
+import Control.Monad (liftM3)
 import Control.Applicative ((<$>))
 
 
