@@ -1,4 +1,4 @@
-module Language.TaPL.Arith.Syntax (Term(..), integerToTerm) where
+module Language.TaPL.Arith.Syntax (Term(..), integerToTerm, isVal, isNumericVal) where
 
 import Test.QuickCheck (Arbitrary, arbitrary, sized, oneof)
 import Control.Monad (liftM, liftM3)
