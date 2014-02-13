@@ -1,4 +1,4 @@
-module Language.TaPL.Boolean.Parser (parseString, parseFile) where
+module Language.TaPL.TypedBoolean.Parser (parseString, parseFile) where
 
 import qualified Text.Parsec.Token as Token
 import Text.Parsec.Language (emptyDef)
@@ -6,7 +6,7 @@ import Text.Parsec.Prim (parse)
 import Text.Parsec.String (Parser)
 import Control.Applicative ((<|>))
 
-import Language.TaPL.Boolean.Syntax (Term(..))
+import Language.TaPL.TypedBoolean.Syntax (Term(..))
 
 
 -- This module is adapted from: http://www.haskell.org/haskellwiki/Parsing_a_simple_imperative_language

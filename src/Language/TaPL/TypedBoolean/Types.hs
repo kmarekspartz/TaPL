@@ -4,6 +4,7 @@ import Language.TaPL.TypedBoolean.Syntax (Term(..))
     
 
 data Ty = TyBool
+    deriving (Show, Read, Eq)
 
 
 typeOf :: Term -> Maybe Ty

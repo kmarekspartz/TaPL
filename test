@@ -5,5 +5,7 @@ echo 'Boolean:' && \
 runhaskell src/Language/TaPL/Boolean/Tests.hs && \
 echo 'Arith:' && \
 runhaskell src/Language/TaPL/Arith/Tests.hs && \
+echo 'TypedBoolean:' && \
+runhaskell src/Language/TaPL/TypedBoolean/Tests.hs && \
 hlint . && \
 grep -R "\t" src
