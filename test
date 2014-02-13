@@ -1,3 +1,5 @@
+# Haddock, Hunit, Hspec
+
 cabal install && \
 echo 'Boolean:' && \
 runhaskell src/Language/TaPL/Boolean/Tests.hs && \
