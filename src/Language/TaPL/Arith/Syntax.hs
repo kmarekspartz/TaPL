@@ -4,6 +4,8 @@ import Test.QuickCheck (Arbitrary, arbitrary, sized, oneof)
 import Control.Monad (liftM, liftM3)
 import Control.Applicative ((<$>))
 
+import Language.TaPL.ShowPretty (ShowPretty, showp)
+
 
 data Term = TmTrue
           | TmFalse
@@ -12,7 +14,7 @@ data Term = TmTrue
           | TmSucc Term
           | TmPred Term
           | TmIsZero Term
-  deriving (Eq, Read)
+  deriving (Eq, Read, Show)
   
 
 isNumericVal :: Term -> Bool
@@ -39,15 +41,15 @@ integerToTerm n | n < 0  = error "integerToTerm called on a negative Integer"
                 | n > 0  = TmSucc $ integerToTerm (n - 1)
 
 
-instance Show Term where
-  show TmTrue = "true"
-  show TmFalse = "false"
-  show (TmIf t1 t2 t3) = "if " ++ show t1 ++ " then " ++ show t2 ++ " else " ++ show t3
+instance ShowPretty Term where
+  showp TmTrue = "true"
+  showp TmFalse = "false"
+  showp (TmIf t1 t2 t3) = "if " ++ showp t1 ++ " then " ++ showp t2 ++ " else " ++ showp t3
 
-  show nv | isNumericVal nv = show $ termToInteger nv
-  show (TmPred t) = "pred " ++ show t
-  show (TmIsZero t) = "iszero " ++ show t
-  show (TmSucc t) = "succ " ++ show t
+  showp nv | isNumericVal nv = show $ termToInteger nv
+  showp (TmPred t) = "pred " ++ showp t
+  showp (TmIsZero t) = "iszero " ++ showp t
+  showp (TmSucc t) = "succ " ++ showp t
 
 
 instance Arbitrary Term where
