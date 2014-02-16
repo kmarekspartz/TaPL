@@ -1,12 +1,14 @@
 module Language.TaPL.TypedBoolean.Tests where
 
-import Test.QuickCheck
-import Text.Printf
+import Control.Applicative ((<$>))
+import Test.QuickCheck (quickCheck)
+import Text.Printf (printf)
 
 import Language.TaPL.ShowPretty (showp)
 import Language.TaPL.TypedBoolean.Syntax (Term)
 import Language.TaPL.TypedBoolean.Parser (parseString)
 import Language.TaPL.TypedBoolean.Eval (eval, eval')
+import Language.TaPL.TypedBoolean.Types (typeOf)
 
 
 main  = mapM_ (\(s,a) -> printf "%-25s: " s >> a) tests
@@ -32,8 +34,31 @@ prop_showp_parse_evaluates_the_same' :: Term -> Bool
 prop_showp_parse_evaluates_the_same' t = eval' (parseString (showp t)) == eval' t
 
 
+-- typeOf before eval is the same after eval.
+prop_typeOf_eval :: Term -> Bool
+prop_typeOf_eval t = 
+    case eval t of
+        Just t' -> typeOf t == typeOf t'
+        Nothing -> True
+
+
+-- typeOf before eval is the same after eval'.
+prop_typeOf_eval' :: Term -> Bool
+prop_typeOf_eval' t = 
+    case eval' t of
+        Just t' -> typeOf t == typeOf t'
+        Nothing -> True
+        
+-- The resulting type of evaluating should be the same for both evaluators.
+prop_typeOf_eval_the_same :: Term -> Bool
+prop_typeOf_eval_the_same t = (typeOf <$> eval' t) == (typeOf <$> eval t)
+
+
 tests  = [("evaluates_the_same", quickCheck prop_evaluates_the_same)
          ,("showp_parse_id", quickCheck prop_showp_parse_id)
          ,("showp_parse_evaluates_the_same", quickCheck prop_showp_parse_evaluates_the_same)
          ,("showp_parse_evaluates_the_same'", quickCheck prop_showp_parse_evaluates_the_same')
+         ,("prop_typeOf_eval", quickCheck prop_typeOf_eval)
+         ,("prop_typeOf_eval'", quickCheck prop_typeOf_eval')
+         ,("prop_typeOf_eval_the_same", quickCheck prop_typeOf_eval_the_same)
          ]
