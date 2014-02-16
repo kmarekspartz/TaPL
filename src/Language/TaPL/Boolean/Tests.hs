@@ -1,7 +1,7 @@
 module Language.TaPL.Boolean.Tests where
 
-import Test.QuickCheck
-import Text.Printf
+import Test.QuickCheck (quickCheck)
+import Text.Printf (printf)
 
 import Language.TaPL.ShowPretty (showp)
 import Language.TaPL.Boolean.Syntax (Term)
