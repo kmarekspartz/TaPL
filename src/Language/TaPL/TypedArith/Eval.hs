@@ -1,8 +1,10 @@
 module Language.TaPL.TypedArith.Eval (eval, eval') where
 
 import Control.Applicative ((<$>))
+import Data.Maybe (isNothing)
 
 import Language.TaPL.TypedArith.Syntax (Term(..), isVal, isNumericVal)
+import Language.TaPL.TypedArith.Types (typeOf)
 
 
 -- Small Step
@@ -28,7 +30,8 @@ eval1 _ = Nothing
 
 
 eval :: Term -> Maybe Term
-eval t | isVal t = Just t
+eval t | isNothing $ typeOf t = Nothing
+       | isVal t = Just t
        | otherwise =
            case eval1 t of
              Nothing -> Nothing
@@ -38,6 +41,8 @@ eval t | isVal t = Just t
 -- Big Step
 
 eval' :: Term -> Maybe Term
+eval' t | isNothing $ typeOf t = Nothing
+
 eval' (TmIf t1 t2 t3) =
   case eval' t1 of
     Just TmTrue -> eval' t2
