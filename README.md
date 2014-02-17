@@ -40,6 +40,11 @@ TypedArith   | 8-2
 <!-- TODO: Put in complete list of languages from the book, with page #, Figure #, and an Implemented column. -->
 
 
+## Tests
+
+To run the tests, use `./test`, which runs `cabal install`, tests each language, `hlint`s, and `grep`s for tabs.
+
+
 ## Previous project
 
 This project was initially based on a previous [tapl-haskell](https://code.google.com/p/tapl-haskell/) project by [Ryan W. Porter](http://www.ryanwporter.com/). That project, like this one, avoids the use of Template-Haskell, but instead it uses a different form of code-generation. For this project, I'd like to avoid code-generation (at least initially), so that each individual language can be considered on its own.
