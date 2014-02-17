@@ -30,12 +30,12 @@ Please do! I would love contributions particularly on the following:
 
 ## Languages
 
-Language     Figure #
------------- --------
-Boolean      3-1
-Arith        3-2
-TypedBoolean 8-1
-TypedArith   8-2
+Language     | Figure # 
+------------ | --------
+Boolean      | 3-1
+Arith        | 3-2
+TypedBoolean | 8-1
+TypedArith   | 8-2
 
 <!-- TODO: Put in complete list of languages from the book, with page #, Figure #, and an Implemented column. -->
 
