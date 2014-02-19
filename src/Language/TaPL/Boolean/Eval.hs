@@ -1,12 +1,21 @@
+-- | Evaluators for Language.TaPL.Boolean.
 module Language.TaPL.Boolean.Eval (eval, eval') where
 
 import Control.Applicative ((<$>))
 
 import Language.TaPL.Boolean.Syntax (Term(..), isVal)
 
-
--- Small Step
  
+-- | Small step evaluator.
+eval :: Term -> Maybe Term
+eval t | isVal t = Just t
+       | otherwise =
+           case eval1 t of
+             Nothing -> Nothing
+             Just t' -> eval t'
+
+
+-- | A single step.
 eval1 :: Term -> Maybe Term
 eval1 t | isVal t   = Just t
 
@@ -17,16 +26,7 @@ eval1 (TmIf t1 t2 t3) | not $ isVal t1 = (\t1' -> TmIf t1' t2 t3) <$> eval1 t1
 eval1 _ = Nothing
 
 
-eval :: Term -> Maybe Term
-eval t | isVal t = Just t
-       | otherwise =
-           case eval1 t of
-             Nothing -> Nothing
-             Just t' -> eval t'
-
-
--- Big Step
-
+-- | Big step evaluator.
 eval' :: Term -> Maybe Term
 eval' (TmIf t1 t2 t3) =
   case eval' t1 of

@@ -1,3 +1,4 @@
+-- | Evaluators for Language.TaPL.TypedArith.
 module Language.TaPL.TypedArith.Eval (eval, eval') where
 
 import Control.Applicative ((<$>))
@@ -7,8 +8,17 @@ import Language.TaPL.TypedArith.Syntax (Term(..), isVal, isNumericVal)
 import Language.TaPL.TypedArith.Types (typeOf)
 
 
--- Small Step
- 
+-- | Small step evaluator.
+eval :: Term -> Maybe Term
+eval t | isNothing $ typeOf t = Nothing
+       | isVal t = Just t
+       | otherwise =
+           case eval1 t of
+             Nothing -> Nothing
+             Just t' -> eval t'
+
+
+-- | A single step.
 eval1 :: Term -> Maybe Term
 eval1 t | isVal t = Just t
 
@@ -29,17 +39,7 @@ eval1 (TmSucc t) | not $ isVal t = TmSucc <$> eval1 t
 eval1 _ = Nothing
 
 
-eval :: Term -> Maybe Term
-eval t | isNothing $ typeOf t = Nothing
-       | isVal t = Just t
-       | otherwise =
-           case eval1 t of
-             Nothing -> Nothing
-             Just t' -> eval t'
-
-
--- Big Step
-
+-- | Big step evaluator.
 eval' :: Term -> Maybe Term
 eval' t | isNothing $ typeOf t = Nothing
 
